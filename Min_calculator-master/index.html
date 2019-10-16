@@ -1,0 +1,797 @@
+<html>
+<head>
+    <title>Min's calculator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style type="text/css">
+      body {
+          margin: 0px 0px 0px 0px;
+          overflow: hidden;
+      }
+
+      #calculator {
+        font-size: 0;
+        width: 400px;
+        height: 710px;
+        background-color: #999999;
+        padding: 5px;
+        margin: auto;
+
+        align-items: center;
+        border: 3px solid black;
+        border-radius: 20px;
+        box-shadow: inset 0 0px 5px;
+      }
+
+      #result {
+          width: 385px;
+          height: 50px;
+          margin-bottom: 2px;
+          padding: 0px 5px 0px 5px;
+          background-color: #EEEDDD;
+          border-radius: 10px;
+          display: inline-flex;
+          justify-content: flex-end;
+          align-items: center;
+          overflow: auto;
+          font: 30px digital;
+          border: 2px solid black;
+          box-shadow: inset 0 0px 5px;
+      }
+
+      #latex {
+        width: 385px;
+        height: 100px;
+        margin-top: 3px;
+        margin-bottom: 15px;
+        padding: 0px 5px 0px 5px;
+        background-color: #EEEEEE;
+        border-radius: 10px;
+        display: inline-flex;
+        justify-content: flex-end;
+        align-items: center;
+        overflow: hidden;
+        font: 20px digital;
+        border: 2px solid black;
+        box-shadow: inset 0 0px 5px;
+      }
+
+      #hspace {
+        margin-top: 1px;
+        margin-bottom: 20px;
+        padding: 0px 5px 0px 5px;
+        width: 385px;
+        height: 196PX;
+        background-color: #DDDDDD;
+        padding: 5px;
+        margin: auto;
+        position: relative;
+        align-items: center;
+        border: 2px solid black;
+        border-radius: 10px;
+        box-shadow: inset 0 0px 5px;
+  		}
+
+      .hspace_line {
+          width: 385px;
+          height: 31px;
+          display: inline-flex;
+          vertical-align: middle;
+          justify-content: center;
+          align-items: center;
+  		}
+
+      .h_memory {
+          font: bold 15px digital;
+          line-height: 30px;
+          height: 30px;
+          width: 192px;
+          overflow: auto;
+          border: 1px solid gray;
+          border-radius: 1px;
+      }
+
+      .h_title {
+        color: #FFFFFF;
+        cursor: pointer;
+        text-align: center;
+        font-size: 22px;
+        background-color: #990000;
+      }
+      .h_title:active {
+        color: #990000;
+        transform: translateY(1px);
+      }
+      .h_title:hover {
+        background-color: red;
+        box-shadow: 5px 5px 5px -1px gray;
+        z-index: 100;
+    	}
+
+      .h_memory1 {
+        color: #111111;
+      }
+      .h_memory2 {
+        color: #333333;
+      }
+      .h_memory3 {
+        color: #333333;
+      }
+      .h_memory4 {
+        color: #333333;
+      }
+      .h_memory5 {
+        color: #333333;
+      }
+      .h_memory6 {
+        color: #333333;
+      }
+      .h_memory7 {
+        color: #333333;
+      }
+      .h_memory8 {
+        color: #333333;
+      }
+      .h_memory9 {
+        color: #333333;
+      }
+      .h_memory10 {
+        color: #333333;
+      }
+      .h_memory11 {
+        color: #333333;
+      }
+
+      #graph {
+        margin-top: 1px;
+        margin-bottom: 5px;
+        padding: 0px 5px 0px 5px;
+        background-color: #EEEEEE;
+        border-radius: 15px;
+        display: inline-flex;
+        justify-content: flex-end;
+        align-items: center;
+        overflow: hidden;
+        font: 30px digital;
+        border: 2px solid black;
+
+      }
+
+      #mspace {
+        background-color: #FFFFFF;
+  			border: 2px solid black;
+  			border-radius: 15px;
+        cursor: pointer;
+      }
+
+      #keybutton {
+        width: 400px;
+        height: 600px;
+    		align-items: center;
+    		justify-content: flex-start;
+      }
+
+      .key {
+        width: 52px;
+        height: 42px;
+        border-radius: 40px;
+        background-color: #DDDDDD;
+        display: inline-flex;
+        margin: 5px 5px 8px 0px;
+        vertical-align: middle;
+        justify-content: center;
+        align-items: center;
+        padding: 5px 0px 5px 0px;
+        cursor: pointer;
+        font: bold 20px digital;
+        color: #444444;
+        box-shadow: inset 0 0px 2px;
+      }
+
+      .symbol-key {
+        font: italic 20px "Times New Roman"
+      }
+
+      .function-key {
+        font: italic 15px "Times New Roman"
+      }
+
+      .eval-key {
+        background-color: #339900;
+        color: white;
+      }
+
+      .clear-key {
+        background-color: #990000;
+        color: white;
+      }
+
+      .key:active {
+        color: #FFFFFF;
+        background-color: #333333;
+        transform: translateY(4px);
+      }
+
+      .key:hover {
+    		box-shadow: 8px 8px 8px -1px gray;
+    		z-index: 100;
+    	}
+
+      .button {
+        width: 50px;
+        height: 40px;
+        border-radius: 10px;
+        background-color: #CCCCCC;
+        display: inline-flex;
+        margin: 5px 5px 8px 0px;
+        vertical-align: middle;
+        justify-content: center;
+        align-items: center;
+        padding: 5px 0px 5px 0px;
+        cursor: pointer;
+        font: bold 15px digital;
+        color: #555555;
+        border: 1px solid #AAAAAA;
+        box-shadow: inset 0 0px 2px;
+      }
+
+      .button:active {
+        color: #FFFFFF;
+        background-color: #333333;
+        transform: translateY(4px);
+      }
+
+      .button:hover {
+        box-shadow: 8px 8px 8px -1px gray;
+    		z-index: 100;
+      }
+
+      .color1 {
+        background-color: #FF9900;
+      }
+
+      .color3 {
+        background-color : #999999;
+      }
+
+      .color2 {
+        background-color: #BBBBBB;
+        color: #000000;
+        width: 52px;
+        height: 42px;
+        border: 0px solid black;
+        font: bold 16px digital;
+      }
+
+      .color4 {
+        background-color : #777777;
+        color: #EEEEEE;
+        width: 52px;
+        height: 42px;
+        border: 0px solid black;
+        font: bold 14px digital;
+      }
+
+      .color5 {
+        background-color : #555555;
+        color: #EEEEEE;
+        width: 52px;
+        height: 42px;
+        border: 0px solid black;
+        font: bold 14px digital;
+      }
+
+      .color6 {
+        background-color : #990000;
+        color: #EEEEEE;
+        width: 52px;
+        height: 42px;
+        border: 0px solid black;
+        font: bold 14px digital;
+      }
+
+      .color7 {
+        background-color : #339900;
+        color: #EEEEEE;
+        width: 52px;
+        height: 42px;
+        border: 0px solid black;
+        font: bold 14px digital;
+      }
+
+      .small_font {
+        font: bold 10px digital;
+      }
+    </style>
+
+    <style type="text/css">
+      select {
+        padding-left:10px;
+        width:100px;
+        height:20px;
+        font-size:13px;
+        color:#444444;
+        border:2px solid #888888;
+        border-radius: 3px;
+      }
+    </style>
+
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js' type='text/javascript'></script>
+    <script src='math.js' type='text/javascript'></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js" type='text/javascript'></script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        "HTML-CSS": { scale: 75}
+      });
+    </script>
+
+      <script type="text/javascript">
+        //연산 기능 및 히스토리 기능 구현
+        $(document).ready(function(){
+          var parser = math.parser();
+          var displayValue = '0';
+
+          var history = new Array();
+          var temp = '0';
+
+          $('#result').text(displayValue);
+          $('#latex').html('$$' + math.parse(displayValue).toTex() + '$$');
+
+          drawing_graph();
+          $('.h_title').each(function(index, key){
+              $(this).click(function(e){
+                if($(this).text() == 'CL') {
+                  try
+                  {
+                    for(var j = 0; j < 11; j++) {
+                      history[j] = null;
+                    }
+                    $(".h_memory").filter(".h_memory1").html(history[10]);
+                    $(".h_memory").filter(".h_memory2").html(history[9]);
+                    $(".h_memory").filter(".h_memory3").html(history[8]);
+                    $(".h_memory").filter(".h_memory4").html(history[7]);
+                    $(".h_memory").filter(".h_memory5").html(history[6]);
+                    $(".h_memory").filter(".h_memory6").html(history[5]);
+                    $(".h_memory").filter(".h_memory7").html(history[4]);
+                    $(".h_memory").filter(".h_memory8").html(history[3]);
+                    $(".h_memory").filter(".h_memory9").html(history[2]);
+                    $(".h_memory").filter(".h_memory10").html(history[1]);
+                    $(".h_memory").filter(".h_memory11").html(history[0]);
+                  }
+                  catch (e) {}
+                }
+              })
+            })
+
+          $('.key').each(function(index, key){
+              $(this).click(function(e){
+                  if(displayValue == '0') displayValue = '';
+
+                  if($(this).text() == 'EV')
+                  {
+                      try
+                      {
+                          for (var i = 0; i < 10; i++) { history[i] = history[i + 1];}
+                          temp = displayValue;
+
+                          displayValue = parser.eval(displayValue).toString();
+                          var tokens = displayValue.split(' ');
+                          if(tokens[0] == 'function')
+                          {
+                              displayValue = tokens[0];
+                              //f(x), g(x)를 그래프화 시키는 것 실패...
+                              //var expr = math.compile(temp);
+                              //expression.push(expr);
+                              //expression_text.push(temp);
+                              //drawing_graph();
+                          }
+                          history[10] = displayValue + ' = ' + '(' + temp + ')';
+
+                          $('#result').text(displayValue);
+                          displayValue = '0';
+
+                          $(".h_memory").filter(".h_memory1").html(history[10]);
+                          $(".h_memory").filter(".h_memory2").html(history[9]);
+                          $(".h_memory").filter(".h_memory3").html(history[8]);
+                          $(".h_memory").filter(".h_memory4").html(history[7]);
+                          $(".h_memory").filter(".h_memory5").html(history[6]);
+                          $(".h_memory").filter(".h_memory6").html(history[5]);
+                          $(".h_memory").filter(".h_memory7").html(history[4]);
+                          $(".h_memory").filter(".h_memory8").html(history[3]);
+                          $(".h_memory").filter(".h_memory9").html(history[2]);
+                          $(".h_memory").filter(".h_memory10").html(history[1]);
+                          $(".h_memory").filter(".h_memory11").html(history[0]);
+                      }
+                      catch (e)
+                      {
+                          displayValue = '0';
+                          if(displayValue != 'function')
+                          {
+                              $('#result').text(e);
+                          }
+                      }
+                  }
+                  else
+                  {
+                      if($(this).text() == 'AC')
+                      {
+                          displayValue = '0';
+                          $('#result').text(displayValue);
+                      }
+                      else
+                      {
+                          displayValue += $(this).text();
+                          $('#result').text(displayValue);
+                      }
+                      var node = math.parse(displayValue);
+                      var latex = node.toTex({parenthesis: 'keep', implicit: 'hide'});
+                      var elem = MathJax.Hub.getAllJax('latex')[0];
+                      MathJax.Hub.Queue(['Text', elem, latex]);
+                  }
+                  e.preventDefault()
+              })
+          });
+          $('.draw_button').each(function(index,key){
+              $(this).click(function (e) {
+                  if ($(this).text() == 'Draw') {
+                      var expr = math.compile($('#result').text());
+                      expression.push(expr); expression_text.push($('#result').text());
+                      drawing_graph();
+                  }
+                  else if ($(this).text() == 'Reset'){
+                      expression = []; expression_text = [];
+                      drawing_graph();
+                  }
+              });
+          });
+      });
+    </script>
+
+    <script type="text/javascript">
+        //그래프 구현
+        minx=-10; maxx = 10; miny = -10; maxy = 10;
+        expression=[];
+        expression_text=[];
+        function drawing_graph(){
+            myTrace= [];
+            for(i=0;i<expression.length;i++) {
+                var xValues = math.range(minx*20, maxx*20, 0.01).toArray();
+                var yValues = xValues.map(function (x) {
+                    return expression[i].eval({x: x});
+                });
+                var trace = {
+                    x:xValues,
+                    y:yValues,
+                    name:expression_text[i],
+                    mode:'lines'
+                };
+                myTrace.push(trace);
+            }
+            var layout = {
+                showlegend :true, //함수 보여주기
+                xaxis: {
+                    range: [minx, maxx], autorange: false
+                },
+                yaxis: {
+                    range: [miny, maxy], autorange: false
+                },
+                margin : {t:20, b:20,r:20,l:20},
+                paper_bgcolor : "#EEEEEE", plot_bgcolor : "#EEEEEE"
+
+            };
+            graph_area = document.getElementById('graph');
+            Plotly.newPlot(graph_area, myTrace, layout);
+        }
+      </script>
+
+    <script type="text/javascript" charset="utf-8">
+      //메모장 구현 (삼색볼펜 및 지우개)
+      window.onload = function() {
+        var canvas = document.getElementById("mspace");
+        var pen = document.getElementById("ch");
+        var mspace = canvas.getContext("2d");
+        var ch;
+
+        pen.onchange = function() {
+          ch = this.value
+          var x = 0;
+          var y = 0;
+          mspace.beginPath();
+          canvas.onmousedown = function() {
+            if (ch == "del") {
+              canvas.onmousemove = function() {
+                mspace.fillStyle = "white";
+                mspace.fillRect(event.x -canvas.offsetLeft  -15, event.y-canvas.offsetTop  -15, 30, 30);
+              }
+              canvas.onmouseup = function() {
+                canvas.onmousemove = null;
+              }
+            }
+            else if (ch == "black_pen") {
+              mspace.strokeStyle = "black";
+              mspace.lineWidth = "1";
+              mspace.lineCap = "circle";
+              mspace.moveTo(event.x -canvas.offsetLeft, event.y-canvas.offsetTop);
+              canvas.onmousemove = function() {
+                mspace.lineTo(event.x -canvas.offsetLeft, event.y-canvas.offsetTop);
+                mspace.stroke();
+              }
+              canvas.onmouseup = function() {
+                canvas.onmousemove = null;
+              }
+            }
+            else if (ch == "red_pen") {
+              mspace.strokeStyle = "red";
+              mspace.lineWidth = "1";
+              mspace.lineCap = "circle";
+              mspace.moveTo(event.x -canvas.offsetLeft, event.y-canvas.offsetTop);
+              canvas.onmousemove = function() {
+                mspace.lineTo(event.x -canvas.offsetLeft, event.y-canvas.offsetTop);
+                mspace.stroke();
+              }
+              canvas.onmouseup = function() {
+                canvas.onmousemove = null;
+              }
+            }
+            else if (ch == "blue_pen") {
+              mspace.strokeStyle = "blue";
+              mspace.lineWidth = "1";
+              mspace.lineCap = "circle";
+              mspace.moveTo(event.x -canvas.offsetLeft, event.y-canvas.offsetTop);
+              canvas.onmousemove = function() {
+                mspace.lineTo(event.x -canvas.offsetLeft, event.y-canvas.offsetTop);
+                mspace.stroke();
+              }
+              canvas.onmouseup = function() {
+                canvas.onmousemove = null;
+              }
+            }
+          }
+        }
+      }
+    </script>
+
+    <script type="text/javascript">
+    //버튼 전환 기능 구현
+      function history() {
+        $('.history_space').show();
+        $('.graph_space').hide();
+        $('.memo_space').hide();
+
+        $('.graph_button').show();
+        $('.draw_button').hide();
+        $('.eval-key').show();
+      }
+      function graph() {
+        $('.history_space').hide();
+        $('.graph_space').show();
+        $('.memo_space').hide();
+
+        $('.graph_button').hide();
+        $('.draw_button').show();
+        $('.eval-key').hide();
+      }
+      function memo() {
+        $('.history_space').hide();
+        $('.graph_space').hide();
+        $('.memo_space').show();
+
+        $('.graph_button').show();
+        $('.draw_button').hide();
+        $('.eval-key').show();
+      }
+
+      function logic() {
+        $('.logic_btn').show();
+        $('.vector_btn').hide();
+        $('.func_btn').hide();
+        $('.special_func_btn').hide();
+        $('.special_num_btn').hide();
+      }
+      function vector() {
+        $('.logic_btn').hide();
+        $('.vector_btn').show();
+        $('.func_btn').hide();
+        $('.special_func_btn').hide();
+        $('.special_num_btn').hide();
+      }
+      function func() {
+        $('.logic_btn').hide();
+        $('.vector_btn').hide();
+        $('.func_btn').show();
+        $('.special_func_btn').hide();
+        $('.special_num_btn').hide();
+      }
+      function special_func() {
+        $('.logic_btn').hide();
+        $('.vector_btn').hide();
+        $('.func_btn').hide();
+        $('.special_func_btn').show();
+        $('.special_num_btn').hide();
+      }
+      function special_num() {
+        $('.logic_btn').hide();
+        $('.vector_btn').hide();
+        $('.func_btn').hide();
+        $('.special_func_btn').hide();
+        $('.special_num_btn').show();
+      }
+    </script>
+</head>
+
+<body>
+    <div id="calculator">
+
+      <div id="result"></div>
+      <div id="latex"></div>
+
+      <div class="history_space">
+        <div id="hspace">
+          <span class="hspace_line">
+            <span class="h_memory h_memory1"></span>
+            <span class="h_memory h_memory7"></span>
+          </span>
+          <span class="hspace_line">
+            <span class="h_memory h_memory2"></span>
+            <span class="h_memory h_memory8"></span>
+          </span>
+          <span class="hspace_line">
+            <span class="h_memory h_memory3"></span>
+            <span class="h_memory h_memory9"></span>
+          </span>
+          <span class="hspace_line">
+            <span class="h_memory h_memory4"></span>
+            <span class="h_memory h_memory10"></span>
+          </span>
+          <span class="hspace_line">
+            <span class="h_memory h_memory5"></span>
+            <span class="h_memory h_memory11"></span>
+          </span>
+          <span class="hspace_line">
+            <span class="h_memory h_memory6"></span>
+            <span class="h_memory h_title">CL</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="graph_space" align="center" style="display:none">
+        <div id="graph" style="width:385px; height:200px;"></div>
+      </div>
+
+      <div class="memo_space" align="center" style="display:none">
+        <canvas id="mspace" width="396" height="186"></canvas>
+        <select id="ch">
+    			<option value="del">Eraser</option>
+    			<option value="black_pen">Black_Pen</option>
+    			<option value="red_pen">Red_Pen</option>
+    			<option value="blue_pen">Blue_Pen</option>
+    		</select>
+      </div>
+
+      <div id="keybutton">
+        <span class="button color5 history_button" onclick="history()">History</span>
+        <span class="button color5 memo_button" onclick="memo()">Memo</span>
+        <span class="button color5 graph_button" onclick="graph()">Graph</span>
+        <span class="button draw_button color6" style="display:none">Reset</span>
+        <span class="key clear-key">AC</span>
+        <span class="key color1">^</span>
+        <span class="key color1">%</span>
+        <span class="key color1">/</span>
+
+        <div class="logic_btn">
+          <span class="key color2"><</span>
+          <span class="key color2"><=</span>
+          <span class="key color2">==</span>
+          <span class="key">7</span>
+          <span class="key">8</span>
+          <span class="key">9</span>
+          <span class="key color1">*</span>
+        </div>
+        <div class="vector_btn" style="display:none">
+          <span class="key color2">[</span>
+          <span class="key color2">]</span>
+          <span class="key color2">,</span>
+          <span class="key">7</span>
+          <span class="key">8</span>
+          <span class="key">9</span>
+          <span class="key color1">*</span>
+        </div>
+        <div class="func_btn" style="display:none">
+          <span class="key symbol-key color2">x</span>
+          <span class="key symbol-key color2">y</span>
+          <span class="key symbol-key color2">z</span>
+          <span class="key">7</span>
+          <span class="key">8</span>
+          <span class="key">9</span>
+          <span class="key color1">*</span>
+        </div>
+        <div class="special_func_btn" style="display:none">
+          <span class="key function-key color2">sin</span>
+          <span class="key function-key color2">cos</span>
+          <span class="key function-key color2">tan</span>
+          <span class="key">7</span>
+          <span class="key">8</span>
+          <span class="key">9</span>
+          <span class="key color1">*</span>
+        </div>
+        <div class="special_num_btn" style="display:none">
+          <span class="key function-key color2">exp</span>
+          <span class="key function-key color2">log</span>
+          <span class="key function-key color2">sqrt</span>
+          <span class="key">7</span>
+          <span class="key">8</span>
+          <span class="key">9</span>
+          <span class="key color1">*</span>
+        </div>
+
+        <div class="logic_btn">
+          <span class="key color2">></span>
+          <span class="key color2">>=</span>
+          <span class="key color2">!=</span>
+          <span class="key">4</span>
+          <span class="key">5</span>
+          <span class="key">6</span>
+          <span class="key color1">-</span>
+        </div>
+        <div class="vector_btn" style="display:none">
+          <span class="key color2">:</span>
+          <span class="key color2">;</span>
+          <span class="key color2"></span>
+          <span class="key">4</span>
+          <span class="key">5</span>
+          <span class="key">6</span>
+          <span class="key color1">-</span>
+        </div>
+        <div class="func_btn" style="display:none">
+          <span class="key symbol-key color2">f</span>
+          <span class="key symbol-key color2">g</span>
+          <span class="key color2">=</span>
+          <span class="key">4</span>
+          <span class="key">5</span>
+          <span class="key">6</span>
+          <span class="key color1">-</span>
+        </div>
+        <div class="special_func_btn" style="display:none">
+          <span class="key symbol-key color2">pi</span>
+          <span class="key symbol-key color2">e</span>
+          <span class="key color2"></span>
+          <span class="key">4</span>
+          <span class="key">5</span>
+          <span class="key">6</span>
+          <span class="key color1">-</span>
+        </div>
+        <div class="special_num_btn" style="display:none">
+          <span class="key color2">abs</span>
+          <span class="key color2">det</span>
+          <span class="key color2 small_font">random()</span>
+          <span class="key">4</span>
+          <span class="key">5</span>
+          <span class="key">6</span>
+          <span class="key color1">-</span>
+        </div>
+
+        <span class="button color4" onclick="logic()">논리</span>
+        <span class="button color4" onclick="vector()">벡터</span>
+        <span class="button color4" onclick="func()">함수<br>변수</span>
+        <span class="key">1</span>
+        <span class="key">2</span>
+        <span class="key">3</span>
+        <span class="key color1">+</span>
+
+        <span class="button color4" onclick="special_func()">삼각<br>상수</span>
+        <span class="button color4" onclick="special_num()">특수</span>
+        <span class="key color2">(</span>
+        <span class="key color2">)</span>
+        <span class="key">0</span>
+        <span class="key color2">.</span>
+        <span class="key eval-key">EV</span>
+        <span class="button draw_button color7" style="display:none">Draw</span>
+      </div>
+
+    </div>
+</body>
+
+</html>
